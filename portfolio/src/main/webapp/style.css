@@ -61,3 +61,30 @@ ul{
 	text-align: center;
 	font-size: 16px;
 }
+
+
+#greetings-container {
+    margin-top: 20px;
+  }
+
+  #messagePrompt{
+    border: 2px;
+    border-style: solid;
+    border-color: black;
+    margin-right: 20px;
+    margin-left: 10px;
+    margin-bottom: 50px;
+    margin-top: 120px;
+    padding: 50px 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 12px 12px 3px 1px #ABC7D8;
+  }
+  
+  #form{
+    background-color: white;
+    padding: 2px 20px;
+    font-family: 'Space Mono' , monospace;
+    padding-bottom: 15px;
+  }
+  

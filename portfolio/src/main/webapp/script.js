@@ -12,9 +12,57 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
+async function showServerTime() {
+    const responseFromServer = await fetch('/date');
+    const textFromResponse = await responseFromServer.text();
+  
+    const dateContainer = document.getElementById('date-container');
+    dateContainer.innerText = textFromResponse;
+  }
+
+async function getGreetings() {
+    const responseFromServer = await fetch('/greetings');
+    const greetings = await responseFromServer.json();
+
+    const GreetingsListElement = document.getElementById('greetings-container');
+    GreetingsListElement.innerHTML = '';
+
+    GreetingsListElement.appendChild(
+        createListElement('Greeting 1: ' + greetings.greeting1));
+    GreetingsListElement.appendChild(
+        createListElement('Greeting 2: ' + greetings.greeting2));
+    GreetingsListElement.appendChild(
+        createListElement('Greeting 3: ' + greetings.greeting3));
+
+}
+
+function requestTranslation() {
+    const text = document.getElementById('text').value;
+    const languageCode = document.getElementById('language').value;
+
+    const resultContainer = document.getElementById('result');
+    resultContainer.innerText = 'Loading...';
+
+    const params = new URLSearchParams();
+    params.append('text', text);
+    params.append('languageCode', languageCode);
+
+    fetch('/translate', {
+      method: 'POST',
+      body: params
+    }).then(response => response.text())
+    .then((translatedMessage) => {
+      resultContainer.innerText = translatedMessage;
+    });
+  }
+
+function createListElement(text) {
+    const liElement = document.createElement('li');
+    liElement.innerText = text;
+    return liElement;
+  }
+
+
 function addRandomGreeting() {
   const greetings =
       ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
@@ -26,3 +74,5 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+
